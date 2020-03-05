@@ -10,13 +10,22 @@
             "versionName": "Jenkins - Winter '19",
             "versionNumber": "1.0.0.NEXT",
             "default": false
+        },
+        {
+            "path": "force-app/main/default/",
+            "package": "Jenkins_CICD_Salesforce",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "44.0",
     "packageAliases": {
-        "Jenkins": "0Ho0N000000CaT3SAK",
-        "Jenkins@1.0.0-1": "04t0N000001E1ksQAC"
+        "Jenkins": "0Ho2w000000Kys3CAC",
+        "Jenkins@1.0.0-1": "04t2w000003s2NOAAY",
+        "Jenkins_CICD_Salesforce": "0Ho2w000000Kys8CAC",
+        "Jenkins_CICD_Salesforce@0.1.0-1": "04t2w000003s86jAAA"
     }
 }
