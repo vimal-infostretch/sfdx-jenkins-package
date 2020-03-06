@@ -3,24 +3,26 @@
 import groovy.json.JsonSlurperClassic
 
 node {
-
+    
+ 
     def SF_CONSUMER_KEY=env.SF_CONSUMER_KEY
     def SF_USERNAME=env.SF_USERNAME
     def SERVER_KEY_CREDENTALS_ID=env.SERVER_KEY_CREDENTALS_ID
     def TEST_LEVEL='RunLocalTests'
-    def PACKAGE_NAME='0Ho2w000000Kys8CAC'
+    def PACKAGE_NAME='0Ho2w000000KysICAS'
     def PACKAGE_VERSION
 
 
     def toolbelt = tool 'toolbelt'
-
+    
+    
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
     // -------------------------------------------------------------------------
 
     stage('checkout source') {
-        checkout scm
+        checkout scm 
     }
 
 
@@ -36,7 +38,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Authorize DevHub') {
-            rc = command "${toolbelt}\\sfdx force:auth:jwt:grant --clientid \"${SF_CONSUMER_KEY}\" --username \"${SF_USERNAME}\" --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --setalias DevHub"
+           rc = command "${toolbelt}\\sfdx force:auth:jwt:grant --clientid \"${SF_CONSUMER_KEY}\" --username \"${SF_USERNAME}\" --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --setalias DevHub"
             if (rc != 0) {
                 error 'Salesforce dev hub org authorization failed.'
             }
@@ -48,8 +50,8 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Create Test Scratch Org') {
+            rc = command "${toolbelt}/sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
             
-            rc = command "${toolbelt}\\sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername username=${SF_USERNAME} --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
             if (rc != 0) {
                 error 'Salesforce test scratch org creation failed.'
             }
@@ -73,7 +75,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Push To Test Scratch Org') {
-            rc = command command "${toolbelt}\\sfdx force:source:push --targetusername ciorg"
+            rc = command "${toolbelt}\\sfdx force:source:push --targetusername ciorg"
             if (rc != 0) {
                 error 'Salesforce push to test scratch org failed.'
             }
@@ -85,7 +87,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Run Tests In Test Scratch Org') {
-            rc = command command "${toolbelt}\\sfdx force:apex:test:run --targetusername ciorg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+            rc = command "${toolbelt}\\sfdx force:apex:test:run --targetusername ciorg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
             if (rc != 0) {
                 error 'Salesforce unit test run in test scratch org failed.'
             }
@@ -97,7 +99,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Delete Test Scratch Org') {
-            rc = command command "${toolbelt}\\sfdx force:org:delete --targetusername ciorg --noprompt"
+            rc = command "${toolbelt}\\sfdx force:org:delete --targetusername ciorg --noprompt"
             if (rc != 0) {
                 error 'Salesforce test scratch org deletion failed.'
             }
@@ -110,9 +112,9 @@ node {
 
         stage('Create Package Version') {
             if (isUnix()) {
-                output = sh returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
+                output = sh returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername DevHub"
             } else {
-                output = bat(returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg").trim()
+                output = bat(returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername DevHub").trim()
                 output = output.readLines().drop(1).join(" ")
             }
 
@@ -135,7 +137,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Create Package Install Scratch Org') {
-            rc = command "${toolbelt}\\sfdx force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
+            rc = command "${toolbelt}\\sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
             if (rc != 0) {
                 error 'Salesforce package install scratch org creation failed.'
             }
