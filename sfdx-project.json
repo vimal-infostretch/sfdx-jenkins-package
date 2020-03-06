@@ -27,6 +27,13 @@
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
             "default": false
+        },
+        {
+            "path": "force-app/main/default/",
+            "package": "Jenkins6Mar609",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "",
@@ -35,6 +42,7 @@
     "packageAliases": {
         "salesforce_new": "0Ho2w000000KysDCAS",
         "JenkinsSalesForce": "0Ho2w000000KysICAS",
-        "JenkinsSalesForce@1.0.0-2": "04t2w000003sPZ6AAM"
+        "JenkinsSalesForce@1.0.0-2": "04t2w000003sPZ6AAM",
+        "Jenkins6Mar609": "0Ho2w000000KysNCAS"
     }
 }

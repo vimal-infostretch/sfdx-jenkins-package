@@ -9,7 +9,7 @@ node {
     def SF_USERNAME=env.SF_USERNAME
     def SERVER_KEY_CREDENTALS_ID=env.SERVER_KEY_CREDENTALS_ID
     def TEST_LEVEL='RunLocalTests'
-    def PACKAGE_NAME='0Ho2w000000KysICAS'
+    def PACKAGE_NAME='0Ho2w000000KysNCAS'
     def PACKAGE_VERSION
 
 
@@ -117,7 +117,7 @@ node {
                 output = bat(returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername DevHub").trim()
                 output = output.readLines().drop(1).join(" ")
             }
-            
+
 
             // Wait 5 minutes for package replication.
             sleep 300
