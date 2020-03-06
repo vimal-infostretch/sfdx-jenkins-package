@@ -117,6 +117,7 @@ node {
                 output = bat(returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername DevHub").trim()
                 output = output.readLines().drop(1).join(" ")
             }
+            
 
             // Wait 5 minutes for package replication.
             sleep 300
