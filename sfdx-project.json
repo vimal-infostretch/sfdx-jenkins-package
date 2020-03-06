@@ -34,6 +34,7 @@
     "sourceApiVersion": "44.0",
     "packageAliases": {
         "salesforce_new": "0Ho2w000000KysDCAS",
-        "JenkinsSalesForce": "0Ho2w000000KysICAS"
+        "JenkinsSalesForce": "0Ho2w000000KysICAS",
+        "JenkinsSalesForce@1.0.0-2": "04t2w000003sPZ6AAM"
     }
 }
