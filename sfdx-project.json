@@ -2,7 +2,10 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
+            "default": true,
+            "package": "JenkinsSalesForce",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT"
         },
         {
             "path": "force-app/main/default",
@@ -30,6 +33,7 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "44.0",
     "packageAliases": {
-        "salesforce_new": "0Ho2w000000KysDCAS"
+        "salesforce_new": "0Ho2w000000KysDCAS",
+        "JenkinsSalesForce": "0Ho2w000000KysICAS"
     }
 }
