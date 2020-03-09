@@ -1,34 +1,6 @@
 {
     "packageDirectories": [
         {
-            "path": "force-app",
-            "default": true,
-            "package": "JenkinsSalesForce",
-            "versionName": "Version 1.0",
-            "versionNumber": "1.0.0.NEXT"
-        },
-        {
-            "path": "force-app/main/default",
-            "package": "Jenkins",
-            "versionName": "Jenkins - Winter '19",
-            "versionNumber": "1.0.0.NEXT",
-            "default": false
-        },
-        {
-            "path": "force-app/main/default/",
-            "package": "Jenkins_CICD_Salesforce",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
-            "default": false
-        },
-        {
-            "path": "force-app/main/default/",
-            "package": "salesforce_new",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
-            "default": false
-        },
-        {
             "path": "force-app/main/default/",
             "package": "Jenkins6Mar609",
             "versionName": "ver 0.1",
@@ -40,9 +12,6 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "44.0",
     "packageAliases": {
-        "salesforce_new": "0Ho2w000000KysDCAS",
-        "JenkinsSalesForce": "0Ho2w000000KysICAS",
-        "JenkinsSalesForce@1.0.0-2": "04t2w000003sPZ6AAM",
         "Jenkins6Mar609": "0Ho2w000000KysNCAS"
     }
 }
