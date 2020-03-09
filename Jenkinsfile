@@ -123,22 +123,14 @@ node {
             sleep 300
 
             
-            
-          //  def jsonSlurper = new groovy.json.JsonSlurperClassic()
-          //  def response = jsonSlurper.parseText(output)
-            
-            PACKAGE_VERSION = testparse(output)
+            def response = parseJson(output)
 
+            PACKAGE_VERSION = response.result.SubscriberPackageVersionId
             response = null
 
             echo ${PACKAGE_VERSION}
         }
-        @NonCPS
-        def testparse(parseString){
-             def jsonSlurper = new groovy.json.JsonSlurperClassic()
-            def response = jsonSlurper.parseText(parseString)
-            return response.result.SubscriberPackageVersionId
-        }
+        
         
 
         // -------------------------------------------------------------------------
@@ -200,6 +192,13 @@ node {
             }
         }
     }
+}
+@NonCPS
+def parseJson(jsonString) {
+      //def jsonSlurper = new JsonSlurperClassic()
+      //      def response = jsonSlurper.parseText(output)
+    //response.result.SubscriberPackageVersionId
+  return new HashMap<>(new JsonSlurper().parseText(jsonString))
 }
 
 def command(script) {
