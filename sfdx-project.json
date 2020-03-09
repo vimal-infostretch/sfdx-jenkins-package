@@ -12,7 +12,7 @@
             "package": "JenkinsSalesForce9Mar_updated1201",
             "versionName": "version 1.0",
             "versionNumber": "1.0.0.NEXT",
-            "default": true
+            "default": false
         },
         {
             "path": "force-app",
