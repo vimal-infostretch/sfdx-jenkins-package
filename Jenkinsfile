@@ -122,16 +122,24 @@ node {
             // Wait 5 minutes for package replication.
             sleep 300
 
-            def jsonSlurper = new groovy.json.JsonSlurperClassic()
-            def response = jsonSlurper.parseText(output)
-
-            PACKAGE_VERSION = response.result.SubscriberPackageVersionId
+            
+            
+          //  def jsonSlurper = new groovy.json.JsonSlurperClassic()
+          //  def response = jsonSlurper.parseText(output)
+            
+            PACKAGE_VERSION = testparse(output)
 
             response = null
 
             echo ${PACKAGE_VERSION}
         }
-
+        @NonCPS
+        def testparse(parseString){
+             def jsonSlurper = new groovy.json.JsonSlurperClassic()
+            def response = jsonSlurper.parseText(parseString)
+            return response.result.SubscriberPackageVersionId
+        }
+        
 
         // -------------------------------------------------------------------------
         // Create new scratch org to install package to.
