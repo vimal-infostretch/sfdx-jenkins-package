@@ -10,8 +10,15 @@
         {
             "path": "force-app/main/default/",
             "package": "JenkinsSalesForce9Mar_updated1201",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
+            "versionName": "version 1.0",
+            "versionNumber": "1.0.0.NEXT",
+            "default": true
+        },
+        {
+            "path": "force-app",
+            "package": "Salesforce_Package",
+            "versionName": "version 1.0",
+            "versionNumber": "1.0.0.NEXT",
             "default": true
         }
     ],
@@ -20,6 +27,7 @@
     "sourceApiVersion": "44.0",
     "packageAliases": {
         "Jenkins6Mar609": "0Ho2w000000KysNCAS",
-        "JenkinsSalesForce9Mar_updated1201": "0Ho2w000000PAxSCAW"
+        "JenkinsSalesForce9Mar_updated1201": "0Ho2w000000PAxSCAW",
+        "Salesforce_Package": "0Ho2w000000PAxXCAW"
     }
 }
