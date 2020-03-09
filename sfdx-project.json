@@ -1,17 +1,25 @@
 {
     "packageDirectories": [
         {
-            "path": "force-app/main/default/",
+            "path": "force-app",
             "package": "Jenkins6Mar609",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
             "default": true
+        },
+        {
+            "path": "force-app/main/default/",
+            "package": "JenkinsSalesForce9Mar_updated1201",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "44.0",
     "packageAliases": {
-        "Jenkins6Mar609": "0Ho2w000000KysNCAS"
+        "Jenkins6Mar609": "0Ho2w000000KysNCAS",
+        "JenkinsSalesForce9Mar_updated1201": "0Ho2w000000PAxSCAW"
     }
 }
