@@ -122,9 +122,7 @@ node {
 
             // Wait 5 minutes for package replication.
             sleep 300
-            try
-            {
-
+            
             try{
              def jsonSlurper = new JsonSlurperClassic()
             def response = jsonSlurper.parseText(output)
@@ -133,7 +131,8 @@ node {
             response = null
 
             echo ${PACKAGE_VERSION}
-            }catch(err)
+            }
+            catch(err)
             {
                 echo "Something failed : ${err}"
                 
