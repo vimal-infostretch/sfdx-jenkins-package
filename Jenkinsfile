@@ -1,6 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
 
 node {
     
@@ -124,11 +125,11 @@ node {
             try
             {
 
-            def jsonSlurper = new JsonSlurperClassic()
+            
+             def jsonSlurper = new JsonSlurperClassic()
             def response = jsonSlurper.parseText(output)
 
             PACKAGE_VERSION = response.result.SubscriberPackageVersionId
-
             response = null
 
             echo ${PACKAGE_VERSION}
@@ -138,7 +139,8 @@ node {
             echo "Error detected, but we will continue."
   }
         }
-
+        
+        
 
         // -------------------------------------------------------------------------
         // Create new scratch org to install package to.
