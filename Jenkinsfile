@@ -1,7 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+
 
 node {
     
@@ -125,7 +125,7 @@ node {
             try
             {
 
-            
+            try{
              def jsonSlurper = new JsonSlurperClassic()
             def response = jsonSlurper.parseText(output)
 
@@ -133,11 +133,11 @@ node {
             response = null
 
             echo ${PACKAGE_VERSION}
+            }catch(err)
+            {
+                echo 'Something failed'
+                throw
             }
-            catch (err) {
-      echo err.getMessage()
-            echo "Error detected, but we will continue."
-  }
         }
         
         
