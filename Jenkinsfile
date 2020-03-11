@@ -124,17 +124,18 @@ node {
             sleep 300
             
             try{
+                echo "Before json call"
              def jsonSlurper = new JsonSlurperClassic()
             def response = jsonSlurper.parseText(output)
-
+echo "Before Package creation"
             PACKAGE_VERSION = response.result.SubscriberPackageVersionId
             response = null
 
-            echo ${PACKAGE_VERSION}
+          //  echo ${PACKAGE_VERSION}
             }
             catch(err)
             {
-                echo "Something failed : ${err}"
+                echo $err
                 
             }
         }
