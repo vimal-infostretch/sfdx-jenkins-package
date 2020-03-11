@@ -1,7 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+
 
 node {
     
@@ -123,7 +123,7 @@ node {
             // Wait 5 minutes for package replication.
             sleep 300
 
-            
+            try{
              def jsonSlurper = new JsonSlurperClassic()
             def response = jsonSlurper.parseText(output)
 
@@ -131,6 +131,10 @@ node {
             response = null
 
             echo ${PACKAGE_VERSION}
+            }catch(err)
+            {
+                echo err.getMessage()
+            }
         }
         
         
