@@ -124,7 +124,8 @@ node {
             sleep 300
 
             
-            def response = parseJson(output)
+             def jsonSlurper = new JsonSlurperClassic()
+            def response = jsonSlurper.parseText(output)
 
             PACKAGE_VERSION = response.result.SubscriberPackageVersionId
             response = null
@@ -193,13 +194,6 @@ node {
             }
         }
     }
-}
-@NonCPS
-def parseJson(jsonString) {
-      //def jsonSlurper = new JsonSlurperClassic()
-      //      def response = jsonSlurper.parseText(output)
-    //response.result.SubscriberPackageVersionId
-  return new HashMap<>(new JsonSlurper().parseText(jsonString))
 }
 
 def command(script) {
