@@ -135,8 +135,8 @@ node {
             echo ${PACKAGE_VERSION}
             }catch(err)
             {
-                echo 'Something failed'
-                throw
+                echo "Something failed : ${err}"
+                
             }
         }
         
