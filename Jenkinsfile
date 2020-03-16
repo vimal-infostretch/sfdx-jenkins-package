@@ -143,61 +143,30 @@ node {
         
 
         // -------------------------------------------------------------------------
-        // Create new scratch org to install package to.
+        // Authenticate Sandbox org to install package to.
         // -------------------------------------------------------------------------
 
-        stage('Create Package Install Scratch Org') {
-            rc = command "${toolbelt}\\sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
+        stage('Staging - Sandbox Org') {
+            echo "Authenticate Sandbox Org to install package to"
+            rc = command "${toolbelt}\\sfdx force:auth:sfdxurl:store -f config/project-scratch-def.json -s -a myDevelopOrg"
+            //rc = command "${toolbelt}\\sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
             if (rc != 0) {
                 error 'Salesforce package install scratch org creation failed.'
             }
         }
 
 
-        // -------------------------------------------------------------------------
-        // Display install scratch org info.
-        // -------------------------------------------------------------------------
-
-        stage('Display Install Scratch Org') {
-            rc = command "${toolbelt}\\sfdx force:org:display --targetusername installorg"
-            if (rc != 0) {
-                error 'Salesforce install scratch org display failed.'
-            }
-        }
-
+       
 
         // -------------------------------------------------------------------------
-        // Install package in scratch org.
+        // Install package in Sandbox org.
         // -------------------------------------------------------------------------
 
-        stage('Install Package In Scratch Org') {
-            rc = command "${toolbelt}\\sfdx force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
+        stage('Install Package In Sandbox Org') {
+            rc = command "${toolbelt}\\sfdx force:package:install --targetusername myDevelopOrg --package ${PACKAGE_VERSION} --wait 10 --publishwait 10 --noprompt --json"
+            // rc = command "${toolbelt}\\sfdx force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
             if (rc != 0) {
                 error 'Salesforce package install failed.'
-            }
-        }
-
-
-        // -------------------------------------------------------------------------
-        // Run unit tests in package install scratch org.
-        // -------------------------------------------------------------------------
-
-        stage('Run Tests In Package Install Scratch Org') {
-            rc = command "${toolbelt}\\sfdx force:apex:test:run --targetusername installorg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
-            if (rc != 0) {
-                error 'Salesforce unit test run in pacakge install scratch org failed.'
-            }
-        }
-
-
-        // -------------------------------------------------------------------------
-        // Delete package install scratch org.
-        // -------------------------------------------------------------------------
-
-        stage('Delete Package Install Scratch Org') {
-            rc = command "${toolbelt}\\sfdx force:org:delete --targetusername installorg --noprompt"
-            if (rc != 0) {
-                error 'Salesforce package install scratch org deletion failed.'
             }
         }
     }
