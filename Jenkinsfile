@@ -114,7 +114,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Create Package Version') {
-            if (env.BRANCH_NAME ==~ /(master)/) {
+           
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt}\\sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername DevHub"
                     } else {
@@ -141,21 +141,21 @@ node {
                 echo $err
                 
             }
-		    }
+		    
           }
         // -------------------------------------------------------------------------
         // Authenticate Sandbox org to install package to.
         // -------------------------------------------------------------------------
 
         stage('Staging - Sandbox Org') {
-           if (env.BRANCH_NAME ==~ /(master)/ ){ 
+          
             echo "Authenticate Sandbox Org to install package to"
             rc = command "${toolbelt}\\sfdx force:auth:sfdxurl:store -f package-sfdx-project.json -s -a myDevelopOrg"
             //rc = command "${toolbelt}\\sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
             if (rc != 0) {
                 error 'Salesforce package install scratch org creation failed.'
             }
-           }
+           
         }
 
 
@@ -166,7 +166,7 @@ node {
         // -------------------------------------------------------------------------
 
         stage('Install Package In Sandbox Org') {
-            if (env.BRANCH_NAME ==~ /(master)/ ){ 
+            
             rc = command "${toolbelt}\\sfdx force:package:install --targetusername myDevelopOrg --package ${PACKAGE_VERSION} --wait 10 --publishwait 10 --noprompt --json"
             // rc = command "${toolbelt}\\sfdx force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
             if (rc != 0) {
@@ -176,7 +176,7 @@ node {
         }    
 
     
-    }
+    
 }
 
 def command(script) {
