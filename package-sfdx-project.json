@@ -8,5 +8,5 @@
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "44.0",
-    "sfdxAuthUrl": "force://PlatformCLI::5Aep861M6dhd2BtI251rti7tZER4iL9VOesQ9C6zVquBeUQ58Ho9rUEEGWfV6ZHzaD0mMSQxWirsxO766zJGs0O@incredible-astro-70313--mydevelop.my.salesforce.com"
+    "sfdxAuthUrl": "force://5Aep861M6dhd2BtI251rti7tZER4iL9VOesQ9C6zVquBeUQ58Ho9rUEEGWfV6ZHzaD0mMSQxWirsxO766zJGs0O@incredible-astro-70313--mydevelop.my.salesforce.com"
 }
